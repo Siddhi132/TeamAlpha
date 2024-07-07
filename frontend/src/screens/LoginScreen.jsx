@@ -20,7 +20,7 @@ const LoginScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && userInfo.persona=='customer') {
       navigate('/post-login-tasks'); // Navigate to the post-login tasks page
     }
   }, [navigate, userInfo]);
@@ -30,7 +30,9 @@ const LoginScreen = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate('/post-login-tasks'); // Navigate to the post-login tasks page after login
+      if (userInfo.persona=='customer') {
+        navigate('/post-login-tasks'); // Navigate to the post-login tasks page after login
+      } 
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
