@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    persona:{
+      type:String,
+      required:true,
+    }
   },
   {
     timestamps: true,
